@@ -25,7 +25,7 @@ struct NewItemView: View {
                 TextField("Title", text: $viewModel.title ).textFieldStyle(DefaultTextFieldStyle())
                 
                 LabeledContent("Calendar colour") {
-                    ColorPicker("", selection: $color, supportsOpacity: false)
+                    ColorPicker("", selection: $viewModel.color, supportsOpacity: false)
                 }
                 //Due Date
                 DatePicker("Due Date", selection: $viewModel.dueDate).datePickerStyle(GraphicalDatePickerStyle())
@@ -45,48 +45,6 @@ struct NewItemView: View {
             .alert(isPresented: $viewModel.showAlert){
                 Alert(title: Text("Error"), message: Text("Please fill in all the fields and select due date"))
             }
-//            LabeledContent("Date/Time") {
-//                DatePicker("", selection: $date)
-//            }
-//            HStack {
-//                ForEach(daysOfTheWeek.indices, id: \.self) {
-//                    index in
-//                    Text(daysOfTheWeek[index])
-//                        .fontWeight(.black)
-//                        .foregroundStyle(color)
-//                        .frame(maxWidth: .infinity)
-//                }
-//            }
-//            LazyVGrid(columns: columns) {
-//                ForEach(days, id: \.self ) { day in
-//                    if day.monthInt != date.monthInt {
-//                        Text("")
-//                    }
-//                    else {
-//                        Text(day.formatted(.dateTime.day()))
-//                            .fontWeight(.bold)
-//                            .foregroundStyle(.secondary)
-//                            .frame(maxWidth: .infinity, minHeight: 40)
-//                            .background(
-//                                Circle()
-//                                    .foregroundStyle(
-//                                        //color.opacity(0.3)
-//                                        Date.now.startOfDay == day.startOfDay
-//                                        ? .red.opacity(0.3)
-//                                        :  color.opacity(0.3)
-//                                    )
-//                            )
-//                    }
-//                    
-//                }
-//            }
-//        }
-//        .padding()
-//        .onAppear {
-//            days = date.calendarDisplayDays
-//        }
-//        .onChange(of: date) {
-//            days = date.calendarDisplayDays
         }
     }
 }
