@@ -15,6 +15,7 @@ struct LoginView: View {
             VStack{
                 //Header
                 HeaderView(title: "To Do List", subtitle:"Get things done", angle: 15, background: .pink)
+                    
                 //Login Form
 
                 Form {
@@ -25,13 +26,15 @@ struct LoginView: View {
                     TextField("Email Address", text: $viewModel.email)
                         .textFieldStyle(DefaultTextFieldStyle())
                         .autocapitalization(.none)
+                        .font(.custom("Hiragino Sans", size: 15))
                     
                     SecureField("Password", text: $viewModel.password)
                         .textFieldStyle(DefaultTextFieldStyle())
+                        .font(.custom("Hiragino Sans", size: 15))
                     
                     TLButton(title: "Log In", background: .blue) {
                         viewModel.login()
-                    }
+                    }.font(.custom("Hiragino Sans", size: 15))
                     .padding()
                 
                 }
@@ -39,10 +42,10 @@ struct LoginView: View {
                 
                 //Create Account
                 VStack{
-                    Text("New around here?")
+                    Text("New around here?").font(.custom("Hiragino Sans", size: 15))
                     
                     NavigationLink("Create an Account", destination: RegisterView())
-                }
+                }.font(.custom("Hiragino Sans", size: 16))
                 .padding(.bottom, 50)
                 
                 Spacer()
@@ -54,3 +57,4 @@ struct LoginView: View {
 #Preview {
     LoginView()
 }
+
