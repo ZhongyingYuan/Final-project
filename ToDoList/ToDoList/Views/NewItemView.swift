@@ -10,26 +10,20 @@ import SwiftUI
 struct NewItemView: View {
     @StateObject var viewModel = NewItemViewViewModel()
     @Binding var newItemPresented : Bool
-    
+    //private variable for colour 
     @State private var color : Color = .blue
-    @State private var date = Date.now
-    let daysOfTheWeek = Date.capitalizedFirstLettersOfWeekdays
-    let columns = Array(repeating: GridItem(.flexible()), count: 7)
-    //let days = 1..<32
+//private variable for days
     @State private var days: [Date] = []
     var body: some View {
         VStack {
-            Text("New Item").font(.system(size: 32)).bold().padding()
+            Text("New Item").font(.custom("Hirangino Sans", size: 30)).bold().padding()
             Form {
                 //Textfield
                 TextField("Title", text: $viewModel.title ).textFieldStyle(DefaultTextFieldStyle())
                 
-                LabeledContent("Calendar colour") {
-                    ColorPicker("", selection: $viewModel.color, supportsOpacity: false)
-                }
-                //Due Date
+                //to select a Due Date using datePicker
                 DatePicker("Due Date", selection: $viewModel.dueDate).datePickerStyle(GraphicalDatePickerStyle())
-                
+                //Button to save
                 TLButton(title: "Save", background: .pink) {
                     if viewModel.canSave {
                         viewModel.save()
@@ -45,6 +39,7 @@ struct NewItemView: View {
             .alert(isPresented: $viewModel.showAlert){
                 Alert(title: Text("Error"), message: Text("Please fill in all the fields and select due date"))
             }
+
         }
     }
 }
