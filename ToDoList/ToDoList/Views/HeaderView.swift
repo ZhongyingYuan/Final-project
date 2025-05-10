@@ -21,13 +21,15 @@ struct HeaderView: View {
                
             VStack {
                 Text(title)
-                    .font(.system(size:50))
                     .foregroundColor(Color.white)
                     .bold()
+                    //.font(.system(size:50))
+                    .font(.custom("Hiragino Sans", size: 50))
                 
                 Text(subtitle)
-                    .font(.system(size:30))
                     .foregroundColor(Color.white)
+                    //.font(.system(size:30))
+                    .font(.custom("Hiragino Sans", size: 30))
             }
             .padding(.top, 80)
         }
@@ -42,3 +44,4 @@ struct HeaderView_Previews: PreviewProvider {
         HeaderView(title: "Title", subtitle: "Subtitle", angle: 15, background: .blue)
     }
 }
+
