@@ -9,21 +9,24 @@ import FirebaseAuth
 import FirebaseFirestore
 import Foundation
 
-class ToDoListItemViewViewModel: ObservableObject {
-    init() {}
 
-    func toggleIsCompleted(item: ToDoListItem) {
-        var itemCopy = item
-        itemCopy.toggleCompleted(!item.isCompleted)
-        guard Auth.auth().currentUser?.uid != nil else {
-            return
-        }
+class ToDoListViewViewModel: ObservableObject {
+    @Published var showingNewItemView = false
+  
+    private let userId: String
     
-        let db = Firestore.firestore()
-        _ = db.collection("users")
-            .document("userid")
-            .collection("todos")
-            .document(itemCopy.id)
-            .setData(from: itemCopy)
-        }
+    init(userId: String) {
+        self.userId = userId
     }
+    
+// delete to do list items
+    func delete(id: String) {
+        let db = Firestore.firestore()
+        
+        db.collection("users")
+            .document(userId)
+            .collection("todos")
+            .document(id)
+            .delete(completion: nil)
+    }
+}
