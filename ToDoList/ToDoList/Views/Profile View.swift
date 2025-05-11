@@ -46,16 +46,19 @@ struct ProfileView: View {
                         .padding()
                     
                     Spacer()
-                    
                 } else {
-                    Text("Loading Profile...")
+                                
+                Text("Loading Profile...")
+                .foregroundColor(.gray)
+                .padding()
+
                 }
             }
             navigationTitle("Profile")
         }
-        .onAppear {
-            viewModel.fetchUser()
-            
+                .onAppear {
+                viewModel.fetchUser()
+        
         }
     }
 }
