@@ -6,35 +6,60 @@
 //edited by Grace
 
 import SwiftUI
+import FirebaseFirestore
+import FirebaseFirestoreCombineSwift
+import FirebaseFirestore
+
 
 struct ToDoListView: View {
-    @StateObject var viewModel = ToDoListViewViewModel()
+    @StateObject var viewModel: ToDoListViewViewModel
+    @FirestoreQuery var items: [ToDoListItem]
     
-    private let userId : String
-    init(userId : String ) {
-        self.userId = userId
+    
+    init(userId: String) {
+        self._items = FirestoreQuery(
+            collectionPath: "users/\(userId)/todos"
+            
+        )
+        self._viewModel = StateObject(
+            wrappedValue: ToDoListViewViewModel(userId: userId)
+        )
     }
+    
     var body: some View {
         NavigationView {
             VStack {
-                
-            }
-            .navigationTitle("To Do List")
-            .toolbar {
-                Button {
-                    //Action
-                    viewModel.showingNewItemView = true
-                } label: {
-                    Image(systemName:"plus")
+                List(items) { item in
+                    ToDoListItemView(item: item)
+                        .swipeActions {
+                            Button {
+                            } label: {
+                                Button("Delete") {
+                                    viewModel.delete(id: item.id)
+                                }
+                                .tint(Color.red)
+                                
+                            }
+                        }
+                        .listStyle(PlainListStyle())
+                    
                 }
-            }
-            .sheet(isPresented: $viewModel.showingNewItemView) {
-                NewItemView(newItemPresented: $viewModel.showingNewItemView)
+                .navigationTitle("To Do List")
+                .toolbar {
+                    Button {
+                        //Action, showing all thec new items
+                        viewModel.showingNewItemView = true
+                    } label: {
+                        Image(systemName:"plus")
+                    }
+                } // show the items using sheet
+                .sheet(isPresented: $viewModel.showingNewItemView) {
+                    NewItemView(newItemPresented: $viewModel.showingNewItemView)
+                }
             }
         }
     }
-}
-
-#Preview {
-    ToDoListView(userId: "")
-}
+    
+    #Preview {
+        ToDoListView(userId: "")
+    }
