@@ -18,3 +18,4 @@ Code on Github (15 marks)
 ◦ ﻿﻿Error handling: Are errors detected at appropriate places? Is the user prevented from entering invalid input and guided toward valid input? (2 mark)
 
 ◦ ﻿﻿Demonstration of collaborative work on Github. (2 mark)
+Each member has contributed to their part of the project.
