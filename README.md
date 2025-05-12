@@ -39,4 +39,5 @@ Warning messages are displayed in order to prevent the user from entering invali
 The Button logic validates whether the task names and task Description are empty before allowing task creation. The user is prevented from continuing if inputs are invalid, there will be a warning that displays an error message to guide users. The delete button will show a warning to confirm if user really wants to delete. This will prevent the user from making an incorrect decision. 
 
 ◦ ﻿﻿Demonstration of collaborative work on Github. (2 mark)
+
 Each member has contributed to their part of the project.
